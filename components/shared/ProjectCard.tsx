@@ -74,7 +74,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               <h3 className="text-xl font-bold text-gray-900 mb-2 leading-tight line-clamp-1">
                 {project.title}
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed mb-4 line-clamp-2">
+              <p className="text-sm text-gray-600 leading-relaxed mb-4 line-clamp-2 min-h-11">
                 {project.description}
               </p>
               <div
