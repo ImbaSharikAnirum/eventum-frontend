@@ -90,8 +90,8 @@ export interface ContactInfoAttributes {
   email: string;
   phone: string;
   address: string;
-  latitude: number;
-  longitude: number;
+  latitude: string;
+  longitude: string;
   socialLinks: SocialLink[];
   serviceOptions: ServiceOption[];
 }

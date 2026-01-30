@@ -10,14 +10,14 @@ type MapInstance = InstanceType<MapGLAPI["Map"]>;
 type MarkerInstance = InstanceType<MapGLAPI["Marker"]>;
 
 interface MapProps {
-  latitude?: number;
-  longitude?: number;
+  latitude?: string;
+  longitude?: string;
   address?: string;
 }
 
 export default function Map({
-  latitude = 55.7558,
-  longitude = 37.6173,
+  latitude = "55.708583",
+  longitude = "37.653291",
   address = "Москва, ул. Примерная, д. 1",
 }: MapProps) {
   const mapContainer = useRef<HTMLDivElement>(null);
@@ -29,9 +29,11 @@ export default function Map({
 
     load().then((mapglAPI) => {
       if (mapContainer.current) {
+        const lat = parseFloat(latitude);
+        const lng = parseFloat(longitude);
         const isMobile = window.innerWidth < 768;
         const map = new mapglAPI.Map(mapContainer.current, {
-          center: [longitude, latitude],
+          center: [lng, lat],
           zoom: isMobile ? 16.5 : 17.5,
           pitch: 45,
           rotation: 30,
@@ -40,7 +42,7 @@ export default function Map({
         mapRef.current = map;
 
         marker = new mapglAPI.Marker(map, {
-          coordinates: [longitude, latitude],
+          coordinates: [lng, lat],
         });
 
         marker.on("click", () => {
