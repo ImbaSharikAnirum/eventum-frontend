@@ -78,14 +78,10 @@ function normalizeProject(project: Project): ProjectData {
     detailedDescription: project.detailedDescription,
     date: project.date,
     client: project.client,
-    // Приоритет: media > path (Strapi URL относительный — добавляем базовый URL)
-    image: project.image?.url
-      ? `${STRAPI_URL}${project.image.url}`
-      : project.imagePath,
-    logo: project.logo?.url
-      ? `${STRAPI_URL}${project.logo.url}`
-      : project.logoPath,
-    gallery: project.gallery?.map(g => `${STRAPI_URL}${g.url}`) || project.galleryPaths || [],
+    // Приоритет: media (Cloudinary — полный URL) > path
+    image: project.image?.url || project.imagePath,
+    logo: project.logo?.url || project.logoPath,
+    gallery: project.gallery?.map(g => g.url) || project.galleryPaths || [],
   };
 }
 
@@ -93,10 +89,8 @@ function normalizePartner(partner: Partner): PartnerData {
   return {
     id: partner.id,
     name: partner.name,
-    // Strapi media URL относительный — добавляем базовый URL
-    logo: partner.logo?.url
-      ? `${STRAPI_URL}${partner.logo.url}`
-      : partner.logoPath,
+    // Приоритет: media (Cloudinary — полный URL) > path
+    logo: partner.logo?.url || partner.logoPath,
     url: partner.url,
   };
 }
