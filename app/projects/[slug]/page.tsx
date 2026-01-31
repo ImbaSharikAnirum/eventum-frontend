@@ -183,10 +183,10 @@ export default async function ProjectPage({
                     <Image
                       src={image}
                       alt={`${project.title} - фото ${index + 1}`}
-                      width={256}
-                      height={256}
+                      width={300}
+                      height={300}
                       className="pointer-events-none relative z-10 h-64 w-64 object-cover"
-                      unoptimized={image.startsWith('http')}
+                     
                     />
                   </DraggableCardBody>
                 );
