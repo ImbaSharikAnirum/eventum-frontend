@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
-
 const circleTexts = [
   {
     words: "EVENTS • CREATIVE • DESIGN • PREMIUM • ",
@@ -34,6 +33,18 @@ export default function Preloader() {
   const circlesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (isVisible) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isVisible]);
+  
+  useEffect(() => {
     const counterAnimation = gsap.to(
       { value: 0 },
       {
@@ -46,7 +57,7 @@ export default function Preloader() {
         onComplete: () => {
           setIsComplete(true);
         },
-      }
+      },
     );
 
     return () => {
@@ -76,7 +87,7 @@ export default function Preloader() {
             duration: 0.5,
             ease: "power2.in",
           },
-          "-=0.4"
+          "-=0.4",
         )
         .to(preloaderRef.current, {
           yPercent: -100,
